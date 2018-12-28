@@ -52,6 +52,7 @@ eventBus.on (
 			case 'unknownLanguage':
 				preparedMessage = i18n.getText(cmd);
 				break;
+			// add your new sentence here
 			default:
 				preparedMessage = i18n.getText('unknownCmd');
 		}
