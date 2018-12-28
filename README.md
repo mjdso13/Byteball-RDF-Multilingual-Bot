@@ -20,11 +20,13 @@ Use unsafe libraries could have severe consequences with a critical platform as 
 
 ## Why use the Resource Description Framework (RDF)
 
-A bot is a «smart agent» or an autonomous program (agent). A smart agent is able to interact with both humans and other smart agents.
+A bot is a «smart agent» or an autonomous program ([agent](https://en.wikipedia.org/wiki/Software_agent)). A smart agent is able to interact with both humans and other smart agents.
 
-RDF is one of Semantic Web standards and it's supported by the W3C. The RDF standard facilitates the treatment and the data exploration by autonomous agents. It makes data readable by both humans and machines.
+[RDF](https://en.wikipedia.org/wiki/Resource_Description_Framework) is one of [Semantic Web](https://en.wikipedia.org/wiki/Semantic_Web) standards and it's supported by the [W3C](https://en.wikipedia.org/wiki/World_Wide_Web_Consortium). The [RDF standard](https://www.w3.org/RDF/) facilitates the treatment and the data exploration by autonomous agents. It makes data readable by both humans and machines.
 
-The Javascript RDF library for browsers and Node.js is actively maintained by Tim Berner-Lee, the LinkedData team and other contributors.
+The [Javascript RDF library](https://www.npmjs.com/package/rdflib) for browsers and Node.js is actively maintained by [Tim Berner-Lee](https://en.wikipedia.org/wiki/Tim_Berners-Lee), the [LinkedData team](https://github.com/linkeddata/rdflib.js) and other contributors.
+
+[RDF FAQ](https://www.w3.org/RDF/FAQ.html)
 
 ## Dependencies
 
@@ -38,6 +40,11 @@ Install all dependencies you may need to generate the js file.
 $ npm install
 ```
 
+Install rdflib.js only
+
+```bash
+$ npm install rdflib
+```
 ## How to add more languages to the RDF multilingual bot
 
 #### conf.js file
