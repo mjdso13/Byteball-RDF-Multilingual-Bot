@@ -42,36 +42,32 @@ $ npm install
 
 #### conf.js file
 - Open the conf.js file and add your langage code as below :
->
-> exports.languages 	= ['en','fr', 'addYourLanguageCode'];
->
+```bash
+exports.languages 	= ['en','fr', 'addYourLanguageCode'];
+
 
 #### rdf/botmessages.rdf
 - To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the classe as below :
-> 
->	<rdfs:literal xml:lang="addYourNewLanguageCode" rdfs:value="
-> 
->  A new translation for the "addYourNewLanguageCode" language
-> 
-> "/>
-> 
+```bash
+<rdfs:literal xml:lang="addYourNewLanguageCode" rdfs:value="A new translation for the \"addYourNewLanguageCode\" language"/>
+```
 
-- To switch the interface language, provide to user a command as below :
-> 
-> [» 🏳 My added language «](command:setLanguage#addYourLanguageCode)
-> 
+- To switch the interface language, provide to user a command inside the appropriate literal as below :
+```bash
+[» 🏳 My added language «](command:setLanguage#addYourLanguageCode)
+```
 
-- To add a new sentence to the bot message file, add a new RDF class and complete it as below (html comments <!-- comment --> are here only for clarity :
-> 
-> <rdfs:Class rdf:ID="welcome"> <!-- open a class (subclass of the main class) -->
-> 	 <rdfs:SubClassOf rdf:resource="#botmessages"/> <!-- the class parent of this class -->
-> 	 <rdfs:label rdf:value="welcome" /> <!-- the label of the class subject -->
->   <!-- literals of the class in several languages -->
-> 	 <rdfs:literal xml:lang="en" rdfs:value="Hello World"/>
-> 	 <rdfs:literal xml:lang="fr" rdfs:value="Bonjour Monde"/> 
-> 	 <rdfs:literal xml:lang="addYourLanguageCode" rdfs:value="Bonjour Monde"/> 
-> </rdfs:Class> <!-- close the class -->
-> 
+- To add a new sentence to the bot message file, add a new RDF class and complete it as below (html comments are here only for clarity) :
+```bash
+<rdfs:Class rdf:ID="welcome"> <!-- open a class (subclass of the main class) -->
+	<rdfs:SubClassOf rdf:resource="#botmessages"/> <!-- the class parent of this class -->
+	<rdfs:label rdf:value="welcome" /> <!-- the label of the class subject -->
+	<!-- literals of the class in several languages -->
+	<rdfs:literal xml:lang="en" rdfs:value="Hello World"/>
+	<rdfs:literal xml:lang="fr" rdfs:value="Bonjour Monde"/> 
+	<rdfs:literal xml:lang="addYourLanguageCode" rdfs:value="Bonjour Monde"/> 
+</rdfs:Class> <!-- close the class -->
+```
 
 ## LICENSE
 MIT
