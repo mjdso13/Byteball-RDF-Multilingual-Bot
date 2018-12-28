@@ -47,7 +47,7 @@ exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 ```
 
 #### rdf/botmessages.rdf
-- To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the classe as below :
+- To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the class as below :
 ```bash
 <rdfs:literal xml:lang="addYourNewLanguageCode" 
 	rdfs:value="A new translation for the \"addYourNewLanguageCode\" language"/>
@@ -60,14 +60,30 @@ exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 
 - To add a new sentence to the bot message file, add a new RDF class and complete it as below (html comments are here only for clarity) :
 ```bash
-<rdfs:Class rdf:ID="welcome"> <!-- open a class (subclass of the main class) -->
+<rdfs:Class rdf:ID="helloworld"> <!-- open a class (subclass of the main class) -->
 	<rdfs:SubClassOf rdf:resource="#botmessages"/> <!-- the class parent of this class -->
-	<rdfs:label rdf:value="welcome" /> <!-- the label of the class subject -->
+	<rdfs:label rdf:value="helloworld" /> <!-- the label of the class subject -->
 	<!-- literals of the class in several languages -->
 	<rdfs:literal xml:lang="en" rdfs:value="Hello World"/>
 	<rdfs:literal xml:lang="fr" rdfs:value="Bonjour Monde"/> 
-	<rdfs:literal xml:lang="addYourLanguageCode" rdfs:value="Bonjour Monde"/> 
+	<rdfs:literal xml:lang="addYourLanguageCode" rdfs:value="Hello World in your new language"/> 
 </rdfs:Class> <!-- close the class -->
+```
+
+- Add your new sentence into the multilingual bot
+```bash
+		// prepare message
+		var preparedMessage = '';
+		switch (cmd) {
+			.	
+			.
+			.
+			// add your new sentence here
+			case 'helloworld':
+				preparedMessage = i18n.getText(cmd)
+			default:
+				preparedMessage = i18n.getText('unknownCmd');
+		}
 ```
 
 ## LICENSE
