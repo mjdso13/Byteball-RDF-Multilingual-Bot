@@ -13,8 +13,8 @@ var botMessageLabels = [];
 var botmessageTexts = [];
 
 // rdf file variables
-// rdf document urn (used as uri)
-var documentURN = 'urn:#botmessages';
+// rdf document uri
+var documentUri = 'https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf';
 
 // rdf document mymetype 
 var mimeType = 'application/rdf+xml';
@@ -40,7 +40,7 @@ try {
 	rdf.parse (
 		rdfDocument, 
 		graphDataModel, 
-		documentURN, 
+		documentUri, 
 		mimeType
 	);
 } catch (err) {
