@@ -2,7 +2,7 @@
 
 This is a simple Byteball multilingual bot implementation based on RDF standard.
 
-- [Valid](https://www.w3.org/RDF/Validator/rdfval?URI=https%3A%2F%2Fraw.githubusercontent.com%2Fn-ric-v%2FByteball-RDF-Multilingual-Bot%2Fmaster%2Frdf%2Fbotmessages.rdf&PARSE=Parse+URI%3A+&TRIPLES_AND_GRAPH=PRINT_BOTH&FORMAT=PNG_EMBED) RDF bot messages file with comments
+- [Valid RDF](https://www.w3.org/RDF/Validator/rdfval?URI=https%3A%2F%2Fraw.githubusercontent.com%2Fn-ric-v%2FByteball-RDF-Multilingual-Bot%2Fmaster%2Frdf%2Fbotmessages.rdf&PARSE=Parse+URI%3A+&TRIPLES_AND_GRAPH=PRINT_BOTH&FORMAT=PNG_EMBED) bot messages file with comments
 - Basic human-bot interactions with comments
 - Sentences in English and French with unicode emoji
 
