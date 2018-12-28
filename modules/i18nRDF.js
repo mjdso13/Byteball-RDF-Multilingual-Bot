@@ -14,7 +14,7 @@ var botmessageTexts = [];
 
 // rdf file variables
 // rdf document uri
-var documentUri = 'https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf';
+var documentUri = 'https://raw.githubusercontent.com/n-ric-v/Byteball-RDF-Multilingual-Bot/master/rdf/botmessages.rdf';
 
 // rdf document mymetype 
 var mimeType = 'application/rdf+xml';
