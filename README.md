@@ -44,15 +44,16 @@ $ npm install
 - Open the conf.js file and add your langage code as below :
 ```bash
 exports.languages 	= ['en','fr', 'addYourLanguageCode'];
-
+```
 
 #### rdf/botmessages.rdf
 - To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the classe as below :
 ```bash
-<rdfs:literal xml:lang="addYourNewLanguageCode" rdfs:value="A new translation for the \"addYourNewLanguageCode\" language"/>
+<rdfs:literal xml:lang="addYourNewLanguageCode" 
+	rdfs:value="A new translation for the \"addYourNewLanguageCode\" language"/>
 ```
 
-- To switch the interface language, provide to user a command inside the appropriate literal as below :
+- To switch the interface language, provide to user a Byteball command inside the appropriate literal as below :
 ```bash
 [» 🏳 My added language «](command:setLanguage#addYourLanguageCode)
 ```
