@@ -4,7 +4,7 @@
 	xmlns="http://www.w3.org/2000/01/rdf-schema#" 
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
-	xmlns:base="urn#botmessages"
+	xmlns:base="https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf"
 >
 <!-- autoclosed main class -->
 <rdfs:Class rdf:ID="botmessages" />
