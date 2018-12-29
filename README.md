@@ -47,13 +47,13 @@ $ npm install rdflib
 ```
 ## How to add more languages to the RDF multilingual bot
 
-#### conf.js file
+#### [conf.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/conf.js)
 - Open the conf.js file and add your langage code as below :
 ```bash
 exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 ```
 
-#### rdf/botmessages.rdf
+#### [rdf/botmessages.rdf](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf)
 - To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the class as below :
 ```bash
 <rdfs:literal xml:lang="addYourNewLanguageCode" 
@@ -77,7 +77,8 @@ exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 </rdfs:Class> <!-- close the class -->
 ```
 
-- Add your new sentence into the multilingual bot
+### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
+- Add your new sentence into the multilingualbot.js file
 ```bash
 		// prepare message
 		var preparedMessage = '';
