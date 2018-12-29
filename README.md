@@ -77,7 +77,7 @@ exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 </rdfs:Class> <!-- close the class -->
 ```
 
-### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
+#### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
 - Add your new sentence into the multilingualbot.js file
 ```bash
 		// prepare message
