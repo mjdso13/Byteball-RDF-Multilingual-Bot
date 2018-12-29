@@ -62,6 +62,5 @@ eventBus.on (
 			'text',
 			preparedMessage + i18n.getText('menu')
 		);
-		// free the memory
 	}
 );
