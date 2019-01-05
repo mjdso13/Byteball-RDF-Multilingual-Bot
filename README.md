@@ -102,9 +102,9 @@ There is only one limitation for now: All descriptions with label have to be tra
 - To add a new phrase, open the 'botmessages' file and add the appropriate description with its labels as below :
 ```bash
 <rdf:Description rdf:ID="A_New_Phrase">
-<rdfs:label xml:lang="en">Your new phrase with 3 parametric strings : %s %d %f</rdfs:label>
-<rdfs:label xml:lang="fr">Votre nouvelle phrase avec 3 paramètres: %s %d %f</rdfs:label>
-<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your new phrase in another language with 3 parameters : %s %d %f</rdfs:label>
+<rdfs:label xml:lang="en">Your new phrase</rdfs:label>
+<rdfs:label xml:lang="fr">Votre nouvelle phrase</rdfs:label>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your new phrase in another language</rdfs:label>
 </rdf:Description>
 ```
 
