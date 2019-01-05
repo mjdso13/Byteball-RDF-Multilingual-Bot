@@ -69,20 +69,20 @@ $ npm install util
 
 #### [conf.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/conf.js)
 - Open the conf.js file and set your default langage code if it's not english as below :
-```bash
+```javascript
 exports.default_language = 'YourDefaultLanguageCode';
 ```
 IETF BCP 47 language identifiers are recommended to be valid XML language attributes
 
 #### [rdf/botmessages](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages)
 - To add a translation, open the 'botmessages' file from the rdf folder and add the appropriate labels as below :
-```bash
+```xml
 <rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your translation</rdfs:label>
 ```
 There is only one limitation for now: All descriptions with label have to be translated if you want the bot works fine.
 
 - To allow user to switch the interface language into a new language, you have to provide command inside a label. Currently, translation command are set under the "languages" description as below :
-```bash
+```xml
 <rdf:Description rdf:ID="languages">
 	<rdfs:label xml:lang="en">Choose your interface language:
 [» 🇫🇷 Français «](command:setLanguage#fr)
@@ -100,7 +100,7 @@ There is only one limitation for now: All descriptions with label have to be tra
 
 #### [rdf/botmessages](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages)
 - To add a new phrase, open the 'botmessages' file and add the appropriate description with its labels as below :
-```bash
+```xml
 <rdf:Description rdf:ID="A_New_Phrase">
 <rdfs:label xml:lang="en">Your new phrase</rdfs:label>
 <rdfs:label xml:lang="fr">Votre nouvelle phrase</rdfs:label>
@@ -109,7 +109,7 @@ There is only one limitation for now: All descriptions with label have to be tra
 ```
 
 - To add a new phrase with parameters, open the 'botmessages' file and add the appropriate description with its labels. In this example, we will set a string (%s), an integer (%i) and a float (%f) :
-```bash
+```xml
 <rdf:Description rdf:ID="A_New_Phrase_With_Parameters">
 <rdfs:label xml:lang="en">
 Your new phrase with 3 parametric strings : %s %d %f
@@ -125,7 +125,7 @@ Your new phrase in another language with 3 parameters : %s %d %f
 
 #### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
 - Add your new phrase into the multilingualbot.js file
-```bash
+```javascript
 	// prepare message
 	var preparedMessage = '';
 	switch (cmd) {
@@ -141,7 +141,7 @@ Your new phrase in another language with 3 parameters : %s %d %f
 ```
 
 - To use parametric phrases, 
-```bash
+```javascript
 preparedMessage = i18nRDF.getFormatted( // format variable text
 	i18nRDF.getText(A_New_Phrase_With_Parameters, from_address), // get translated command/text
 	["1", 2, 3.0] // set a parameters array (string, integer and float as in example above)
