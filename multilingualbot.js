@@ -9,15 +9,20 @@ const device = require('byteballcore/device.js');
 
 //load modules
 const i18n = require('./modules/i18nRDF');
+const utils = require('./modules/utils');
 
 // pairing initialization
 eventBus.on (
 	'paired', 
-	function (from_address, pairing_secret) {
+	function (from_address, pairing_secret)  {
+		// set initial language interface
+		i18n.setLanguage(conf.default_language, from_address);
+		// send welcome message to user
 		device.sendMessageToDevice (
 			from_address, 
 			'text',
-			i18n.getText('welcome') + i18n.getText('menu')
+			i18n.getText('welcome', from_address) + 
+				i18n.getText('menu', from_address) // add menu 
 		);
 	}
 );
