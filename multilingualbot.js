@@ -31,41 +31,65 @@ eventBus.on (
 eventBus.on (
 	'text', 
 	function (from_address, text) {
-		// change the interface language if asked by user
+		// copy text content to rewrite it
 		var cmd = text;
-		if (cmd.substring(0, cmd.indexOf('#')) === 'setLanguage') {
-			if (conf.languages.includes(cmd.substring(cmd.lastIndexOf("#") + 1))) {
-				i18n.setLanguage(cmd.substring(cmd.lastIndexOf("#") + 1));
-				cmd = 'languageChanged';
-			} else { cmd = 'unknownLanguage'; }
-		} 
+
+		// test if it's a parametric command 
+		if (utils.isParametricRequest(cmd)) {
+			switch (utils.getCmd(cmd)) { // switch based on main command
+				case 'setLanguage' :  // if user want change the interface language 
+					// test if language is available with the parameter
+					if (i18n.availableLanguages(utils.getParameter(cmd))) {
+						// set the language interface
+						i18n.setLanguage(utils.getParameter(cmd), from_address);
+						// adapt command
+						cmd = 'languageChanged';
+					} else {  // if language isn't available, adapt the command
+						cmd = 'unknownLanguage';
+						}
+					break;
+					// add more cases of parametric commands here
+				default : // if it's not a valid command
+					cmd = 'unknownCmd';
+			}
+		}
+
 		// prepare message
 		var preparedMessage = '';
 		switch (cmd) {
 			case 'main':
-				preparedMessage = i18n.getText(cmd);
+				preparedMessage = i18n.getText(cmd, from_address);
 				break;
 			case 'explain':
-				preparedMessage = i18n.getText(cmd);
+				preparedMessage = i18n.getText(cmd, from_address);
 				break;
 			case 'languages':
-				preparedMessage = i18n.getText(cmd);
+				preparedMessage = i18n.getText(cmd, from_address);
 				break;
 			case 'languageChanged':
-				preparedMessage = i18n.getText(cmd);
+				preparedMessage = i18n.getText(cmd, from_address);
 				break;
 			case 'unknownLanguage':
-				preparedMessage = i18n.getText(cmd);
+				preparedMessage = i18n.getFormatted( // format variable text
+					i18n.getText(cmd, from_address), // get command text
+					[utils.getParameter(text)] // extract & forward parameters array
+				);
 				break;
 			// add your new sentence here
 			default:
-				preparedMessage = i18n.getText('unknownCmd');
+				preparedMessage = i18n.getFormatted( // format variable text
+					i18n.getText("unknownCmd", from_address), // get command text
+					[utils.getParameter(text)] // extract & forward parameters array
+				);
 		}
+
 		// send message to user
 		device.sendMessageToDevice (
 			from_address, 
 			'text',
-			preparedMessage + i18n.getText('menu')
+			preparedMessage + i18n.getText('menu', from_address)
 		);
+		// help GC to free allocated memory faster 
+		cmd = ''; preparedMessage = '';
 	}
 );
