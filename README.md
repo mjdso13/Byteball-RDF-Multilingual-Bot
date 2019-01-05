@@ -111,33 +111,39 @@ There is only one limitation for now: All descriptions with label have to be tra
 - To add a new phrase with parameters, open the 'botmessages' file and add the appropriate description with its labels. In this example, we will set a string (%s), an integer (%i) and a float (%f) :
 ```bash
 <rdf:Description rdf:ID="A_New_Phrase_With_Parameters">
-<rdfs:label xml:lang="en">Your new phrase with 3 parametric strings : %s %d %f</rdfs:label>
-<rdfs:label xml:lang="fr">Votre nouvelle phrase avec 3 paramètres: %s %d %f</rdfs:label>
-<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your new phrase in another language with 3 parameters : %s %d %f</rdfs:label>
+<rdfs:label xml:lang="en">
+Your new phrase with 3 parametric strings : %s %d %f
+</rdfs:label>
+<rdfs:label xml:lang="fr">
+Votre nouvelle phrase avec 3 paramètres: %s %d %f
+</rdfs:label>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">
+Your new phrase in another language with 3 parameters : %s %d %f
+</rdfs:label>
 </rdf:Description>
 ```
 
 #### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
 - Add your new phrase into the multilingualbot.js file
 ```bash
-		// prepare message
-		var preparedMessage = '';
-		switch (cmd) {
-			.	
-			.
-			.
-			// add your new sentence here
-			case 'A_New_Phrase':
-				preparedMessage = i18nRDF.getText(cmd)
-			default:
-				...
-		}
+	// prepare message
+	var preparedMessage = '';
+	switch (cmd) {
+		.	
+		.
+		.
+		// add your new sentence here
+		case 'A_New_Phrase':
+			preparedMessage = i18nRDF.getText(cmd)
+		default:
+			...
+	}
 ```
 
 - To use parametric phrases, 
 ```bash
 preparedMessage = i18nRDF.getFormatted( // format variable text
-	i18nRDF.getText(A_New_Phrase_With_Parameters, from_address), // get translated command text
+	i18nRDF.getText(A_New_Phrase_With_Parameters, from_address), // get translated command/text
 	["1", 2, 3.0] // set a parameters array (string, integer and float as in example above)
 );
 ```
