@@ -9,7 +9,7 @@ var db = require('byteballcore/db');
 db.query(
 	"CREATE TABLE IF NOT EXISTS paired_device_configuration (\
 		device_address CHAR(33) NOT NULL UNIQUE, \
-		device_language CHAR(8) NOT NULL, \
+		device_language CHAR(8) NOT NULL \
 	)"
 );
 
