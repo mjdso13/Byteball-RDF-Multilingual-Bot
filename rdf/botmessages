@@ -84,21 +84,21 @@ RDF signifie «Resource Description Framework». Il s'agit d'un modèle de donn�
 <rdf:Description rdf:ID="unknownLanguage">
 	<rdfs:label xml:lang="en">I don't know this language, human!
 
-Is "%s" a human language ?
+Is '%s' a human language ?
 
 </rdfs:label>
 	<rdfs:label xml:lang="fr">Je ne connais pas cette langue, humain !
 
-"%s" est-il un langage humain?
+'%s' est-il un langage humain?
 
 </rdfs:label>
 </rdf:Description>
 
 <rdf:Description rdf:ID="unknownCmd">
-	<rdfs:label xml:lang="en">I don't understand "%s" as a valid command.
+	<rdfs:label xml:lang="en">I don't understand '%s' as a valid command.
 
 </rdfs:label>
-	<rdfs:label xml:lang="fr">Je ne comprends pas "%s" comme une commande valide.
+	<rdfs:label xml:lang="fr">Je ne comprends pas '%s' comme une commande valide.
 
 </rdfs:label>
 </rdf:Description>
