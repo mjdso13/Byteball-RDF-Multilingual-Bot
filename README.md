@@ -1,15 +1,25 @@
+
 # Byteball-RDF-Multilingual-Bot
 
-This is a simple Byteball multilingual bot implementation based on RDF standard.
+This is a simple Byteball multilingual bot implementation based on the RDF standard.
 
-- [Valid RDF](https://www.w3.org/RDF/Validator/rdfval?URI=https%3A%2F%2Fraw.githubusercontent.com%2Fn-ric-v%2FByteball-RDF-Multilingual-Bot%2Fmaster%2Frdf%2Fbotmessages.rdf&PARSE=Parse+URI%3A+&TRIPLES_AND_GRAPH=PRINT_BOTH&FORMAT=PNG_EMBED) bot messages file with comments
-- Basic human-bot interactions with comments
-- Sentences in English and French with unicode emoji
+- [Valid RDF](https://www.w3.org/RDF/Validator/rdfval?URI=https%3A%2F%2Fraw.githubusercontent.com%2Fn-ric-v%2FByteball-RDF-Multilingual-Bot%2Fmaster%2Frdf%2Fbotmessages&PARSE=Parse+URI%3A+&TRIPLES_AND_GRAPH=PRINT_BOTH&FORMAT=PNG_EMBED) bot messages file.
+-- Double quotation marks are valid but the W3C RDF validator doesn't interpret them correctly even if it considers the document valid.
+- Basic human-bot interactions.
+- Bot sentences in English and French with unicode emojis.
 
+## What's new in version 1.0.1 ?
+
+- Backup and reload the language interface preference of users.
+-- Use the Byteball database module
+- Purely descriptive RDF
+-- Easier to read, to understand and to maintain
+- Formatted parametric strings with the NodeJS module "util"
+-- Array of arguments (%s, %d, %i, %f, %j, etc.) to use in a printf-like function.
 
 ## Why this multilingual RDF implementation
 
-Current Byteball multilingual bots use i18n library. This library isn't safe due to :
+Current Byteball multilingual bots use i18n module. This module isn't safe due to :
 - memory leaks
 - files overwriting & creation
 - various side effects
@@ -30,58 +40,85 @@ The [Javascript RDF library](https://www.npmjs.com/package/rdflib) for browsers 
 
 ## Dependencies
 
-- rdflib.js 
+- [rdflib.js](https://www.npmjs.com/package/rdflib)
+- [util](https://www.npmjs.com/package/util)
 
 ## Install
 
-Install all dependencies you may need to generate the js file.
+Install all dependencies you may need to generate the js file should be installed automatically with this command.
 
 ```bash
 $ npm install
 ```
 
-Install rdflib.js only
+But you can install them separately.
+
+Install rdflib.js module
 
 ```bash
 $ npm install rdflib
 ```
+
+Install "util" module
+
+```bash
+$ npm install util
+```
+
 ## How to add new languages to the RDF multilingual bot
 
 #### [conf.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/conf.js)
-- Open the conf.js file and add your langage code as below :
+- Open the conf.js file and set your default langage code if it's not english as below :
 ```bash
-exports.languages 	= ['en','fr', 'addYourLanguageCode'];
+exports.default_language = 'YourDefaultLanguageCode';
 ```
+IETF BCP 47 language identifiers are recommended to be valid XML language attributes
 
-#### [rdf/botmessages.rdf](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf)
-- To add your new translated text, open the botmessages.rdf file from the rdf folder and complete the literals of the class as below :
+#### [rdf/botmessages](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages)
+- To add a translation, open the 'botmessages' file from the rdf folder and add the appropriate labels as below :
 ```bash
-<rdfs:literal xml:lang="addYourNewLanguageCode" 
-	rdfs:value="A new translation for the \"addYourNewLanguageCode\" language"/>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your translation</rdfs:label>
 ```
+There is only one limitation for now: All descriptions with label have to be translated if you want the bot works fine.
 
-- To switch the interface language, provide to user a Byteball command inside the appropriate literal as below :
+- To allow user to switch the interface language into a new language, you have to provide command inside a label. Currently, translation command are set under the "languages" description as below :
 ```bash
-[» 🏳 My added language «](command:setLanguage#addYourLanguageCode)
+<rdf:Description rdf:ID="languages">
+	<rdfs:label xml:lang="en">Choose your interface language:
+[» 🇫🇷 Français «](command:setLanguage#fr)
+[» 🏳 Your new language «](command:setLanguage#An_IETF_BCP47_Language_id)</rdfs:label>
+<rdfs:label xml:lang="fr">Choisissez la langue de l'interface :
+[» 🇬🇧 English «](command:setLanguage#en)
+[» 🏳 Your new language «](command:setLanguage#An_IETF_BCP47_Language_id)</rdfs:label>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Choose your interface language:
+[» 🇬🇧 English «](command:setLanguage#en)
+[» 🇫🇷 Français «](command:setLanguage#fr)</rdfs:label>
+</rdf:Description>
 ```
 
 ## How to add new sentences to the RDF multilingual bot
 
-#### [rdf/botmessages.rdf](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages.rdf)
-- To add a new sentence to the bot message file, add a new RDF class and complete it as below (html comments are here only for clarity) :
+#### [rdf/botmessages](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/rdf/botmessages)
+- To add a new phrase, open the 'botmessages' file and add the appropriate description with its labels as below :
 ```bash
-<rdfs:Class rdf:ID="helloworld"> <!-- open a class (subclass of the main class) -->
-	<rdfs:SubClassOf rdf:resource="#botmessages"/> <!-- the class parent of this class -->
-	<rdfs:label rdf:value="helloworld" /> <!-- the label of the class subject -->
-	<!-- literals of the class in several languages -->
-	<rdfs:literal xml:lang="en" rdfs:value="Hello World"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="Bonjour Monde"/> 
-	<rdfs:literal xml:lang="addYourLanguageCode" rdfs:value="Hello World in your new language"/> 
-</rdfs:Class> <!-- close the class -->
+<rdf:Description rdf:ID="A_New_Phrase">
+<rdfs:label xml:lang="en">Your new phrase with 3 parametric strings : %s %d %f</rdfs:label>
+<rdfs:label xml:lang="fr">Votre nouvelle phrase avec 3 paramètres: %s %d %f</rdfs:label>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your new phrase in another language with 3 parameters : %s %d %f</rdfs:label>
+</rdf:Description>
+```
+
+- To add a new phrase with parameters, open the 'botmessages' file and add the appropriate description with its labels. In this example, we will set a string (%s), an integer (%i) and a float (%f) :
+```bash
+<rdf:Description rdf:ID="A_New_Phrase_With_Parameters">
+<rdfs:label xml:lang="en">Your new phrase with 3 parametric strings : %s %d %f</rdfs:label>
+<rdfs:label xml:lang="fr">Votre nouvelle phrase avec 3 paramètres: %s %d %f</rdfs:label>
+<rdfs:label xml:lang="An_IETF_BCP47_Language_id">Your new phrase in another language with 3 parameters : %s %d %f</rdfs:label>
+</rdf:Description>
 ```
 
 #### [multilingualbot.js](https://github.com/n-ric-v/Byteball-RDF-Multilingual-Bot/blob/master/multilingualbot.js)
-- Add your new sentence into the multilingualbot.js file
+- Add your new phrase into the multilingualbot.js file
 ```bash
 		// prepare message
 		var preparedMessage = '';
@@ -90,11 +127,19 @@ exports.languages 	= ['en','fr', 'addYourLanguageCode'];
 			.
 			.
 			// add your new sentence here
-			case 'helloworld':
-				preparedMessage = i18n.getText(cmd)
+			case 'A_New_Phrase':
+				preparedMessage = i18nRDF.getText(cmd)
 			default:
-				preparedMessage = i18n.getText('unknownCmd');
+				...
 		}
+```
+
+- To use parametric phrases, 
+```bash
+preparedMessage = i18nRDF.getFormatted( // format variable text
+	i18nRDF.getText(A_New_Phrase_With_Parameters, from_address), // get translated command text
+	["1", 2, 3.0] // set a parameters array (string, integer and float as in example above)
+);
 ```
 
 ## LICENSE
