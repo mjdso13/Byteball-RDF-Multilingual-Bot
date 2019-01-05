@@ -1,99 +1,115 @@
 'use strict';
-// load libraries
-const rdf = require('rdflib');
-const path = require ('path');
-const fs = require('fs');
 
-// load module functions
-const rdfTriples = require('./RDFTriples');
+const rdf = require('./RDFParser');
 
-// variables
-var language = 'en';
-var botMessageLabels = [];
-var botmessageTexts = [];
+// load the Byteball database module
+var db = require('byteballcore/db');
 
-// rdf file variables
-// rdf document uri
-var documentUri = 'https://raw.githubusercontent.com/n-ric-v/Byteball-RDF-Multilingual-Bot/master/rdf/botmessages.rdf';
-
-// rdf document mymetype 
-var mimeType = 'application/rdf+xml';
-
-// RDF-Schema namespace
-var RDFS = rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
-
-// initialize the graph for the data model
-var graphDataModel = rdf.graph();
-
-// read the RDF file
-var rdfDocument = fs.readFileSync(
-	path.join (
-		__dirname, 
-		'..', 
-		'rdf/botmessages.rdf'
-	), 
-	'utf8'
+// query create the table if it doesn't exist
+db.query(
+	"CREATE TABLE IF NOT EXISTS paired_device_configuration (\
+		device_address CHAR(33) NOT NULL UNIQUE, \
+		device_language CHAR(8) NOT NULL, \
+	)"
 );
 
-// parse the rdf with bot messages
-try {
-	rdf.parse (
-		rdfDocument, 
-		graphDataModel, 
-		documentUri, 
-		mimeType
-	);
-} catch (err) {
-    console.log(err)
-}
+// initialize users' language preference array
+var usersLanguage = [];
 
-// load bot message labels
-botMessageLabels = rdfTriples.getSubjectValue (
-	graphDataModel.statementsMatching (
-		undefined, 
-		RDFS('label'), 
-		undefined
-	)
-);
-
-// function to prepare bot messages
-function prepareBotMessages () {
-	// load translated bot messages
-	var tmpBotMessage = rdfTriples.getObjectValue (
-		graphDataModel.statementsMatching (
-			undefined, 
-			RDFS('value'), 
-			undefined
-		),
-		language
-	);
-	// store the bot messages with its labels as array id
-	for (var i = 0; i < tmpBotMessage.length; i++) {
-			botmessageTexts[botMessageLabels[i]] = tmpBotMessage[i];
+// query to fill the users' language preference when bot restarts
+db.query(
+	"SELECT device_address AS address, \
+	device_language AS language \
+	FROM paired_device_configuration",
+	function(rows) {
+		var row = '';	
+		for (row in rows) {
+			usersLanguage[rows[row].address] =  rows[row].language;
+		}
+		row = ''; // unload from memory
 	}
-}
-// prepare bot messages
-prepareBotMessages();
+);
+
+db = ''; // unload database
+
+// extract the subject subgraph of the RDF data model
+var rdfSubGraph = rdf.parseLocalRDF();
+
+// extract IETF language tags of the RDF sub graph
+var IETFLanguageTags = rdf.getIETFLanguageTags(rdfSubGraph);
+
+// extract bot messages of the RDF sub graph
+var botMessages = rdf.getMessages(rdfSubGraph, IETFLanguageTags);
+
+// unload the rdf subgraph of the memory to help GC
+rdfSubGraph = [];
 
 // internationalization functions
 var i18n = 
 {
-	// get user interface language
-	getLanguage () {
-		return language;
+	// Is language requested available among IETF language tags
+	availableLanguages (
+		tag
+	) { 
+		return IETFLanguageTags.includes(tag); 
 	} ,
+
 	// set user interface language
 	setLanguage (
-		lang
+		language,  // new language
+		user // user recipient address
 	) {
-		language = lang;
-		prepareBotMessages();
+		// load Byteball database module
+		var db = require('byteballcore/db');
+		
+		// query to update language if user exists
+		db.query(
+			"UPDATE paired_device_configuration \
+			SET device_language = '" + language + "' \
+			WHERE device_address ='" + user + "'"
+		);
+
+		// or insert new user in database if user doesn't exist
+		db.query(
+			"INSERT OR IGNORE INTO paired_device_configuration (\
+				device_address, \
+				device_language \
+			) VALUES ( \
+				'" + user + "', \
+				'" + language + "' \
+			)"
+		);
+
+		db = ''; // unload database module
+
+		usersLanguage[user] = language; // set user languages in memory
 	} ,
-	// get translated text
+
+	// get translated text for specific user
 	getText (
-		toTranslate
+		text, // text to transalte
+		user // user recipient address
 	) {
-		return botmessageTexts[toTranslate];
+		return botMessages[usersLanguage[user]][text];
+	} ,
+
+	// get formatted parametric text
+	getFormatted (
+		text, // text to format with parameter
+		parameter // array of parameters
+	) {
+			var util = require('util'); // load nodejs util module
+
+			var formatted = text; // copy text to format
+			var i = ''; // initialize key iterator
+
+			for (i in parameter) {
+				formatted = util.format(formatted , parameter[i]); // format text
+			}
+			
+			util = ''; i = ''; // unload module and erase key iterator
+
+			return formatted; 
 	}
 };
 // export the functions
