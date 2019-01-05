@@ -8,7 +8,7 @@ const wallet = require('byteballcore/wallet.js');
 const device = require('byteballcore/device.js');
 
 //load modules
-const i18n = require('./modules/i18nRDF');
+const i18n = require('./modules/i18n');
 const utils = require('./modules/utils');
 
 // pairing initialization
