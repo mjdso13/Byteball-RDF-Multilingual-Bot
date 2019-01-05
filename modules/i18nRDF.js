@@ -45,7 +45,7 @@ var botMessages = rdf.getMessages(rdfSubGraph, IETFLanguageTags);
 rdfSubGraph = [];
 
 // internationalization functions
-var i18n = 
+var i18nRDF = 
 {
 	// Is language requested available among IETF language tags
 	availableLanguages (
@@ -113,4 +113,4 @@ var i18n =
 	}
 };
 // export the functions
-module.exports = i18n;
+module.exports = i18nRDF;
