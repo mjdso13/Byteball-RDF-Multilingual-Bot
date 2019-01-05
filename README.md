@@ -4,18 +4,18 @@
 This is a simple Byteball multilingual bot implementation based on the RDF standard.
 
 - [Valid RDF](https://www.w3.org/RDF/Validator/rdfval?URI=https%3A%2F%2Fraw.githubusercontent.com%2Fn-ric-v%2FByteball-RDF-Multilingual-Bot%2Fmaster%2Frdf%2Fbotmessages&PARSE=Parse+URI%3A+&TRIPLES_AND_GRAPH=PRINT_BOTH&FORMAT=PNG_EMBED) bot messages file.
--- Double quotation marks are valid but the W3C RDF validator doesn't interpret them correctly even if it considers the document valid.
+  - Double quotation marks are valid but the W3C RDF validator doesn't interpret them correctly even if it considers the document valid.
 - Basic human-bot interactions.
 - Bot sentences in English and French with unicode emojis.
 
 ## What's new in version 1.0.1 ?
 
 - Backup and reload the language interface preference of users.
--- Use the Byteball database module
+  - Use the Byteball database module
 - Purely descriptive RDF
--- Easier to read, to understand and to maintain
+  - Easier to read, to understand and to maintain
 - Formatted parametric strings with the NodeJS module "util"
--- Array of arguments (%s, %d, %i, %f, %j, etc.) to use in a printf-like function.
+  - Array of arguments (%s, %d, %i, %f, %j, etc.) to use in a printf-like function.
 
 ## Why this multilingual RDF implementation
 
