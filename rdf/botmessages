@@ -1,93 +1,54 @@
-<?xml version="1.0"?>
-<!-- RDF document header (syntax, schema and absolute uri of the file,etc..) -->
-<rdf:RDF 
-	xmlns="http://www.w3.org/2000/01/rdf-schema#" 
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
-	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
-	xmlns:base="https://raw.githubusercontent.com/n-ric-v/Byteball-RDF-Multilingual-Bot/master/rdf/botmessages.rdf"
->
-<!-- autoclosed main class -->
-<rdfs:Class rdf:ID="botmessages" />
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-<!-- open a class (subclass of the main class) -->
-<rdfs:Class rdf:ID="welcome">
-	<!-- the class parent of this class -->
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<!-- the label of the class subject -->
-	<rdfs:label rdf:value="welcome" />
-	<!-- literals of the class in several languages -->
-	<rdfs:literal xml:lang="en" rdfs:value="
-
-Welcome to the Byteball RDF multilingual bot, human!
+<rdf:Description rdf:ID="welcome">
+	<rdfs:label xml:lang="en">Welcome to the Byteball RDF multilingual bot, human!
 
 Why the bot cross the road?
 
-"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="
-
-Bienvenu sur le bot multilingue Byteball RDF, humain !
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Bienvenu sur le bot multilingue Byteball RDF, humain !
 
 Pourquoi le bot traverse la route ?
 
-"/>
-<!-- close the class -->
-</rdfs:Class>
+</rdfs:label>
+</rdf:Description>
 
-<!-- more classes -->
-
-<rdfs:Class rdf:ID="menu">	
-	<rdfs:label rdfs:value="menu" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="
-
-[» More explainations about me 🤖 «](command:explain)
+<rdf:Description rdf:ID="menu">
+	<rdfs:label xml:lang="en">[» More explainations about me 🤖 «](command:explain)
 [» Go to the homepage 🏠 «](command:main)
 [» Change language 🗣 «](command:languages)
-
-"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="
-
-[» Plus d'explication à mon sujet 🤖 «](command:explain)
+</rdfs:label>
+	<rdfs:label xml:lang="fr">[» Plus d'explication à mon sujet 🤖 «](command:explain)
 [» Allez à l'accueil 🏠 «](command:main)
 [» Changez la langue 🗣 «](command:languages)
+</rdfs:label>
+</rdf:Description>
 
-"/>
-</rdfs:Class>
-
-<rdfs:Class rdf:ID="main">	
-	<rdfs:label rdfs:value="main" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="
-
-Why the bot cross the road? To help, human!
+<rdf:Description  rdf:ID="main">
+	<rdfs:label xml:lang="en">Why the bot cross the road? To help, human!
 
 It's my nature.
 
-"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="
-
-Pourquoi le bot traverse la route ? Pour aider, humain!
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Pourquoi le bot traverse la route ? Pour aider, humain!
 
 C'est ma raison d'être.
 
-"/>
-</rdfs:Class>
+</rdfs:label>
+</rdf:Description>
 
-<rdfs:Class rdf:ID="explain">	
-	<rdfs:label rdfs:value="explain" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="
-I'm a Byteball multilingual bot, human.
+<rdf:Description rdf:ID="explain">
+	<rdfs:label xml:lang="en">I'm a Byteball multilingual bot, human.
 
 A bot is a smart agent or an autonomous program. A smart agent is able to interact with both humans and smart agents. A chatbot like Byteball bots are conversational agents. Byteball bots have limited capacities but offer useful services to Byteball users.
 
 The Byteball multilingual bot uses RDF standard to interact with humans.
 
 RDF stands for « Resource Description Framework ». It's a data model designed to describe web ressources with metadata. It allows to process automaticaly data with autonomous agents and facilitate human-machine communications because readble by both. It's a Semantic Web standard supported by the W3C and by Tim Berner-Lee, the World Wide Web father.
-"
-/>
-	<rdfs:literal xml:lang="fr" rdfs:value="
-Je suis un bot multilingue Byteball, humain.
+
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Je suis un bot multilingue Byteball, humain.
 
 Un bot est un agent intelligent ou un programme autonome. Un agent intelligent est capable d'interagir avec des humains et d'autres agents intelligents. Un chatbot comme les bots Byteball sont des agents conversationels. Les bots Byteball ont des capacités limitées mais offrent des services utiles aux utilisateurs Byteball.
 
@@ -95,43 +56,51 @@ Le bot multilingue Byteball utilise le standard RDF pour interagir avec les huma
 
 RDF signifie «Resource Description Framework». Il s'agit d'un modèle de données conçu pour décrire les ressources Web avec des métadonnées. Il permet de traiter automatiquement les données avec des agents autonomes et facilite les communications homme-machine car compréhensible par les deux. Il s'agit d'un standard du Web Sémantique pris en charge par le W3C et encouragé par Tim Berner-Lee, le père du Web.
 
-"/>
-</rdfs:Class>
+</rdfs:label>
+</rdf:Description>
 
-<rdfs:Class rdf:ID="languages">	
-	<rdfs:label rdfs:value="languages" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="
-Choose your interface language:
+<rdf:Description rdf:ID="languages">
+	<rdfs:label xml:lang="en">Choose your interface language:
 
 [» 🇫🇷 Français «](command:setLanguage#fr)
 
-"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="
-Choisissez la langue de l'interface :
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Choisissez la langue de l'interface :
 
 [» 🇬🇧 English «](command:setLanguage#en)
 
-"/>
-</rdfs:Class>
-<rdfs:Class rdf:ID="languageChanged">	
-	<rdfs:label rdfs:value="languageChanged" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="The interface language have been changed with success, human!"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="La langue d'interface a été changé avec succès, humain !"/>
-</rdfs:Class>
-<rdfs:Class rdf:ID="unknownLanguage">	
-	<rdfs:label rdfs:value="unknownLanguage" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="I don't know this language, human!"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="Je ne connais pas cette langue, humain !"/>
-</rdfs:Class>
-<rdfs:Class rdf:ID="unknownCmd">	
-	<rdfs:label rdfs:value="unknownCmd" />
-	<rdfs:SubClassOf rdf:resource="#botmessages"/>
-	<rdfs:literal xml:lang="en" rdfs:value="I don't understand what you want, human!"/>
-	<rdfs:literal xml:lang="fr" rdfs:value="Je ne comprends pas ce que vous voulez, humain !"/>
-</rdfs:Class>
+</rdfs:label>
+</rdf:Description>
 
-<!-- close the RDF document-->
+<rdf:Description rdf:ID="languageChanged">
+	<rdfs:label xml:lang="en">The interface language have been changed with success, human!
+
+</rdfs:label>
+	<rdfs:label xml:lang="fr">La langue d'interface a été changé avec succès, humain !
+
+</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:ID="unknownLanguage">
+	<rdfs:label xml:lang="en">I don't know this language, human!
+
+Is "%s" a human language ?
+
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Je ne connais pas cette langue, humain !
+
+"%s" est-il un langage humain?
+
+</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:ID="unknownCmd">
+	<rdfs:label xml:lang="en">I don't understand "%s" as a valid command.
+
+</rdfs:label>
+	<rdfs:label xml:lang="fr">Je ne comprends pas "%s" comme une commande valide.
+
+</rdfs:label>
+</rdf:Description>
+
 </rdf:RDF> 
