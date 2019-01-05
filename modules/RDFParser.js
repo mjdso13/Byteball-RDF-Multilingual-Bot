@@ -63,12 +63,6 @@ var RDFParser = {
 
 		// return subject of the data model
 		return subgraph;
-		// prepare IETF language tags array
-		//IETFLanguageTags = getIETFLanguageTags(graphDataModel.subjectIndex);
-		// prepare the bot messages array
-		//botMessages = getMessages(graphDataModel.subjectIndex);
-		// clear last variables to force GC execution faster
-		//rdf = ''; graphDataModel = [];
 	} , 
 
 	// return IETF language tags
